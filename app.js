@@ -85,6 +85,14 @@ app.post('/todos/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/todos/:id/delete', (req, res) => {
+  const id = req.params.id
+  Todo.findById(id)
+    .then(todo => todo.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 // Start and listen on the Express server
 app.listen(port, () => {
   console.log(`Listening on the server http://localhost:${port}`)
