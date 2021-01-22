@@ -1,0 +1,4 @@
+<form action="/todos/{{ todo._id }}/edit" method="POST">
+  <input type="text" name="name" value="{{ todo.name }}">
+  <button type="submit">Save</button>
+</form>
