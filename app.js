@@ -1,29 +1,13 @@
 // Require related packages
 const express = require('express')
-const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const Todo = require('./models/todo')
 const methodOverride = require('method-override')
+
 const routes = require('./routes')
+require('./config/mongoose')
 
-const app = express()
 const port = 3000
-
-// Connect mongoDB
-mongoose.connect('mongodb://localhost/todo-list', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-// Get connection status
-const db = mongoose.connection
-// Error
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-// Success
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
+const app = express()
 
 // Set up template engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
