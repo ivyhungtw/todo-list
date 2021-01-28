@@ -1,10 +1,10 @@
-<p>
-  <input type="checkbox" name="isDone" {{#if todo.isDone}}checked{{/if}} disabled>
-{{ todo.name }}
-</p>
-
-<a href="/todos/{{ todo._id }}/edit">edit</a>
 <form method="POST" action="/todos/{{ todo._id }}?_method=DELETE" style="display: inline">
-  <button type="submit">delete</button>
+  <div class="input-group">
+    <div class="input-group-text">
+      <input type="checkbox" name="isDone" {{#if todo.isDone}}checked{{/if}} disabled>
+    </div>
+    <input class="form-control" type="text" name="name" value="{{ todo.name }}" disabled>
+    <a class="btn btn-outline-success" href="/todos/{{ todo._id }}/edit">edit</a>
+    <button type="submit" class="btn btn-outline-danger">delete</button>
+  </div>
 </form>
-<a href="/">back</a>
