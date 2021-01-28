@@ -2,9 +2,9 @@
   {{#each todos}}
   <li class="list-group-item">
     <div class="row">
-      <div class="col-auto me-auto">
-        <input type="checkbox" class="me-1" name="isDone" {{#if isDone}}checked{{/if}} disabled>
-        <h4 style="display: inline;">{{ this.name }}</h4>
+      <div class="col-auto mr-auto d-flex align-items-center">
+        <input type="checkbox" class="mr-1" name="isDone" {{#if isDone}}checked{{/if}} disabled>
+        <h4 style="display: inline; margin-bottom: 0;">{{ this.name }}</h4>
       </div>
       <div class="col-auto">
         <a class="btn btn-secondary" href="/todos/{{ this._id }}">detail</a>

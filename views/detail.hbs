@@ -1,10 +1,14 @@
-<form method="POST" action="/todos/{{ todo._id }}?_method=DELETE" style="display: inline">
+<form action="/todos/{{ todo._id }}?_method=DELETE" method="POST" style="display: inline;">
   <div class="input-group">
-    <div class="input-group-text">
-      <input type="checkbox" name="isDone" {{#if todo.isDone}}checked{{/if}} disabled>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <input type="checkbox" name="isDone" {{#if todo.isDone }} checked {{/if}} disabled>
+      </div>
     </div>
-    <input class="form-control" type="text" name="name" value="{{ todo.name }}" disabled>
-    <a class="btn btn-outline-success" href="/todos/{{ todo._id }}/edit">edit</a>
-    <button type="submit" class="btn btn-outline-danger">delete</button>
+    <input class="form-control" type="text" placeholder="name" name="name" value="{{ todo.name }}" disabled>
+    <div class="input-group-append">
+      <a class="btn btn-outline-success" href="/todos/{{ todo._id }}/edit">edit</a>
+      <button class="btn btn-outline-danger"" type="submit">delete</button>
+    </div>
   </div>
 </form>
