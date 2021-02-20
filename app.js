@@ -19,10 +19,10 @@ app.use(express.urlencoded({ extended: true }))
 // Use method-override
 app.use(methodOverride('_method'))
 
-// Set up routes
+// Direct request to the main router
 app.use(routes)
 
 // Start and listen on the Express server
 app.listen(PORT, () => {
-  console.log(`Listening on the server http://localhost:${PORT}`)
+  console.log(`App is running on http://localhost:${PORT}`)
 })
