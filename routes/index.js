@@ -2,15 +2,18 @@
 const express = require('express')
 const router = express.Router()
 
-// Require home module
+// Require modules
 const home = require('./modules/home')
 const todos = require('./modules/todos')
 const users = require('./modules/users')
 
+// Require middleware
+const { authenticator } = require('../middleware/auth')
+
 // Direct request to modules
-router.use('/', home)
-router.use('/todos', todos)
+router.use('/todos', authenticator, todos)
 router.use('/users', users)
+router.use('/', authenticator, home)
 
 // Export
 module.exports = router
