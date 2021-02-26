@@ -24,29 +24,45 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  const errors = []
+
   User.findOne({ email }).then(user => {
+    // Check if the email already exists
     if (user) {
-      console.log('The email has already been used!')
-      res.render('register', {
+      errors.push({ message: 'The email has already been used!' })
+    }
+
+    // Check if password and confirmPassword are the same
+    if (password !== confirmPassword) {
+      errors.push({ message: 'Password and confirmPassword do not match.' })
+    }
+
+    if (errors.length) {
+      return res.render('register', {
+        errors,
         name,
         email,
         password,
         confirmPassword,
       })
-    } else {
-      User.create({
-        name,
-        email,
-        password,
-      })
-        .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
     }
+
+    User.create({
+      name,
+      email,
+      password,
+    })
+      .then(() => {
+        req.flash('success_msg', 'Register successfully! Please login.')
+        res.redirect('/users/login')
+      })
+      .catch(error => console.log(error))
   })
 })
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', 'Logout successfully!')
   res.redirect('/users/login')
 })
 
