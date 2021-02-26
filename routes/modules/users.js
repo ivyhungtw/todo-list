@@ -18,14 +18,6 @@ router.post(
   })
 )
 
-// router.post(
-//   'login',
-//   passport.authenticate('local', {
-//     successRedirect: '/',
-//     failureRedirect: '/users/login',
-//   })
-// )
-
 router.get('/register', (req, res) => {
   res.render('register')
 })
@@ -51,6 +43,11 @@ router.post('/register', (req, res) => {
         .catch(error => console.log(error))
     }
   })
+})
+
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
 })
 
 // Export module
