@@ -10,6 +10,13 @@ const todoSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  userId: {
+    // Relate to User model
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true,
+  },
 })
 
 // Export

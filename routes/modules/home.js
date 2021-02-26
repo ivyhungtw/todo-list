@@ -7,7 +7,8 @@ const Todo = require('../../models/todo')
 
 // Set up routes of home page
 router.get('/', (req, res) => {
-  Todo.find()
+  const userId = req.user._id
+  Todo.find({ userId })
     .lean()
     .sort({ _id: 'asc' })
     .then(todos => res.render('index', { todos }))
