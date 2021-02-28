@@ -1,6 +1,8 @@
 // Require related packages
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcryptjs')
+
 const User = require('../models/user')
 
 // Export and initialize package
@@ -21,15 +23,18 @@ module.exports = app => {
           .then(user => {
             if (!user) {
               return done(null, false, {
-                message: 'That email is not registered!',
+                message: 'The email has not been registered!',
               })
             }
-            if (user.password !== password) {
-              return done(null, false, {
-                message: 'Incorrect password!',
-              })
-            }
-            return done(null, user)
+
+            return bcrypt.compare(password, user.password).then(isMatch => {
+              if (!isMatch) {
+                return done(null, false, {
+                  message: 'Incorrect password!',
+                })
+              }
+              return done(null, user)
+            })
           })
           .catch(err => done(err, false))
       }
