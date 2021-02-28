@@ -11,23 +11,29 @@ module.exports = app => {
 
   // Set up local strategy
   passport.use(
-    new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-      User.findOne({ email })
-        .then(user => {
-          if (!user) {
-            return done(null, false, {
-              message: 'That email is not registered!',
-            })
-          }
-          if (user.password !== password) {
-            return done(null, false, {
-              message: 'Email or Password incorrect.',
-            })
-          }
-          return done(null, user)
-        })
-        .catch(err => done(err, false))
-    })
+    new LocalStrategy(
+      {
+        usernameField: 'email',
+        passReqToCallback: true,
+      },
+      (req, email, password, done) => {
+        User.findOne({ email })
+          .then(user => {
+            if (!user) {
+              return done(null, false, {
+                message: 'That email is not registered!',
+              })
+            }
+            if (user.password !== password) {
+              return done(null, false, {
+                message: 'Incorrect password!',
+              })
+            }
+            return done(null, user)
+          })
+          .catch(err => done(err, false))
+      }
+    )
   )
 
   // Serialize and deserialize user

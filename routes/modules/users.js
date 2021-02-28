@@ -7,7 +7,7 @@ const User = require('../../models/user')
 
 // Set up routes
 router.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', { error_msg: req.flash('error') })
 })
 
 router.post(
@@ -15,6 +15,7 @@ router.post(
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login',
+    failureFlash: true,
   })
 )
 
