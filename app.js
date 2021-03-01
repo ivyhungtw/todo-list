@@ -15,14 +15,14 @@ require('./config/mongoose')
 const PORT = process.env.PORT
 const app = express()
 
-// Set up template engine
+// Configure view engine to render hbs templates.
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
-// Set up body parser
+// Handle body parsing
 app.use(express.urlencoded({ extended: true }))
 
-// Set up session
+// Handle session
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
