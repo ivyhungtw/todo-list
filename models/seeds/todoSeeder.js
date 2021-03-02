@@ -29,9 +29,11 @@ db.once('open', () => {
     )
     .then(user => {
       const userId = user._id
-      for (let i = 0; i < 10; i++) {
-        Todo.create({ name: `name-${i + 1}`, userId })
-      }
+      return Promise.all(
+        Array.from({ length: 10 }, (_, i) =>
+          Todo.create({ name: `name-${i + 1}`, userId })
+        )
+      )
     })
     .then(() => {
       console.log('done')
