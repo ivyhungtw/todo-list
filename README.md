@@ -1,4 +1,4 @@
-# Expense Tracker
+# Todo List
 
 A simple web application built with Express.js for users to manage tasks.
 
