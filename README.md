@@ -13,6 +13,10 @@ This project is Live on: https://guarded-refuge-45415.herokuapp.com/
 - Edit a to do
 - Delete a to do
 
+![Login page](/public/photos/login.png)
+
+![Home page](/public/photos/index.png)
+
 ## Prerequisites
 
 - Node.js v14.15.1
